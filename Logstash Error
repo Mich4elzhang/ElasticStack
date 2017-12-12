@@ -1,0 +1,10 @@
+1.[2017-12-10T18:43:33,319][FATAL][logstash.runner] Logstash could not be started because there is already another instance using the configured data directory. 
+If you wish to run multiple instances, you must change the "path.data" setting.
+
+解决方法：不能多个实例共享一个path.data，可以在启动不同实例的时候，命令行里增加"--path.data PATH " ，为不同实例指定不同的路径。
+
+2.logstash运行没有报错，也正常从Filebeat接收message，但是ES端没有日志导入
+
+原因：mapping有问题（字段类型有问题）。我是因为小集合mapping的server_time是keyword类型，而大集合mapping的server_time字段是date类型，冲突了
+
+
